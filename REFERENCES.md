@@ -13,3 +13,5 @@ https://coddy.tech/docs/c/random-numbers
 https://coddy.tech/docs/c/header-files -> header file explanations (goes with the one below)
 
 https://retrogamecoders.com/getting-organized-modular-programming-in-c/ -> how to modular program in c, basically explanaing header and implementaiton files
+
+https://www.tutorialspoint.com/article/what-is-long-long-in-c-cplusplus -> long long
