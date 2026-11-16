@@ -1,3 +1,5 @@
+//Juan Byeon, Eric Dong, Ahmed Elnaggar, Nathan Hong, Jan Rebolledo Jimenez
+
 #include <stdlib.h>
 #include <time.h>
 #include "game.h"
@@ -10,8 +12,9 @@ static const long long PRIZE_VALUE[NUM_CASES] = {
   75000000, 100000000
 };
 
-//Fisher-Yates shuffle
 
+
+//Fisher-Yates shuffle (apparantly the best shuffle method)
 static void shufflePrizes(long long prizes[], int n) {
   for (int i = n - 1; i > 0; i--) {
     int j = rand() % (i + 1); //random from 0 to i
@@ -22,7 +25,7 @@ static void shufflePrizes(long long prizes[], int n) {
 }
 
 void initializeGame(GameState *game) {
-  srand((unsigned) time(NULL));
+  srand((unsigned) time(NULL)); //This is for randon numgen every time you run
 
   for (int i = 0; i < NUM_CASES; i++) {
     game -> prizes[i] = PRIZE_VALUE[i];
@@ -42,7 +45,7 @@ void initializeGame(GameState *game) {
 int selectPlayerCase(GameState *game, int caseNumber) {
   if (caseNumber < 1 || caseNumber > NUM_CASES)
     return 0;
-  game -> playerCase = caseNumber - 1;
+  game -> playerCase = caseNumber - 1; //since array starts at 0
   return 1;
 }
 

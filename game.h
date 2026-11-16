@@ -1,3 +1,5 @@
+//Juan Byeon, Eric Dong, Ahmed Elnaggar, Nathan Hong, Jan Rebolledo Jimenez
+//This is a header file for the game, has GameState struct with a bunch of info
 #ifndef GAME_H
 #define GAME_H
 
