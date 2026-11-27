@@ -8,6 +8,7 @@
 #include <string.h>
 #include "banker.h"
 #include "game.h"
+#include "display.h"
 
 #define NUM_OF_ROUNDS 9
 #define IN_STAT -1 //player wants to view "stats"
@@ -15,10 +16,6 @@
 
 static const int CASES_PER_ROUND[NUM_OF_ROUNDS] = {6, 5, 4, 3, 2, 1, 1, 1, 1};
 
-//prints money in readable format
-static void printMoney(long long cents) {
-  printf("$%lld.%02lld", cents / 100, cents % 100);
-}
 
 //reads player input, return input of stat (IN_STAT) if type "stat", or check invalid
 
@@ -48,13 +45,13 @@ int main() {
   initializeGame(&game);
 
   printf("\nDEAL OR NO DEAL\n\n");
-
+  printf("TYPE \"stat\" for STATS\n\n");
   while(1) {
     printf("pick case (1 - 26) : ");
     choice = readInput();
 
     if(choice == IN_STAT)
-      printf("stats not yet implemented");
+      printStats(&game);
     else if(selectPlayerCase(&game, choice)) //valid choice so leave loop
       break;
     else
@@ -77,7 +74,7 @@ int main() {
       choice = readInput();
 
       if(choice == IN_STAT)
-	printf("stat not yet implemented");
+	printStats(&game);
 
       else if(openCase(&game, choice)) {
 	printf("Case #%d had ", choice);
@@ -102,7 +99,7 @@ int main() {
       choice = readInput();
 
       if(choice == IN_STAT)
-	printf("Stat not yet");
+        printStats(&game);
 
       
       else if(choice == 1) {
@@ -145,7 +142,7 @@ int main() {
 
 
     if(choice == IN_STAT)
-      printf("stats not yet");
+      printStats(&game);
     
     else if(choice == 1) {
       printf("You kept your case.");
