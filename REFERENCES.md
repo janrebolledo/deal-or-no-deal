@@ -21,3 +21,5 @@ https://cplusplus.com/strncmp -> strncmp for "stat" command
 https://condor.depaul.edu/glancast/373class/docs/slides/Feb01/slide7.html -> sscanf (reading a number from a string)
 
 https://dev.to/primeemre/scanf-vs-fgets-in-c-which-one-to-use-and-why-scanf-skips-input-1ccf -> why fgets + sscanf instead of scanf
+
+https://www.geeksforgeeks.org/c/c-bubble-sort/ -> bubble sort 
