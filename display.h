@@ -12,4 +12,8 @@ void printMoney(long long cents);
 //prints stats
 void printStats(const GameState *game);
 
+//prints board with prizes with small to big
+void printBoard(const GameState *game);
+
+
 #endif

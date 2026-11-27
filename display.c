@@ -57,3 +57,72 @@ void printStats(const GameState *game) {
   
   
 }
+
+
+
+void printBoard(const GameState *game) {
+
+  long long values[NUM_CASES]; //prize amt
+  
+  int gone[NUM_CASES]; //holds 1 if prize eliminated
+
+  //copy values in the arrays
+  for(int i = 0; i < NUM_CASES; i++) {
+    values[i] = game -> prizes[i];
+    gone[i] = game -> opened[i];
+  }
+
+  //BUBBLE SORT FOR SORTING LOWEST TO HIGHST simultaneously
+
+  for(int i = 0; i < NUM_CASES - 1; i++) {
+    for(int j = 0; j < NUM_CASES - 1 - i; j++) {
+      if(values[j] > values[j + 1]) {
+	long long temp1 = values[j];
+	values[j] = values[j + 1];
+	values[j + 1] = temp1;
+
+	int temp2 = gone[j];
+	gone[j] = gone[j + 1];
+	gone[j + 1] = temp2;
+	
+      }
+    }
+  }
+
+
+  int half = NUM_CASES / 2;
+
+  printf("\n+--------- PRIZE BOARD ---------+\n");
+
+  for(int i = 0; i < half; i++) {
+
+    long long left = values[i];
+    long long right = values[i + half];
+
+    //mark with x if money taken
+
+
+    if(gone[i])
+      printf("| X $%7lld.%02lld", left / 100, left % 100);
+    else
+      printf("|   $%7lld.%02lld", left / 100, left % 100);
+
+
+    if(gone[i + half])
+      printf("   X $%7lld.%02lld |\n", right / 100, right % 100);
+    else
+      printf("     $%7lld.%02lld |\n", right / 100, right % 100);
+    
+  }
+
+  printf("+-------------------------------+\n");
+
+  
+
+    
+
+  
+  
+
+  
+}
