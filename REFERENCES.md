@@ -15,3 +15,9 @@ https://coddy.tech/docs/c/header-files -> header file explanations (goes with th
 https://retrogamecoders.com/getting-organized-modular-programming-in-c/ -> how to modular program in c, basically explanaing header and implementaiton files
 
 https://www.tutorialspoint.com/article/what-is-long-long-in-c-cplusplus -> long long
+
+https://cplusplus.com/strncmp -> strncmp for "stat" command
+
+https://condor.depaul.edu/glancast/373class/docs/slides/Feb01/slide7.html -> sscanf (reading a number from a string)
+
+https://dev.to/primeemre/scanf-vs-fgets-in-c-which-one-to-use-and-why-scanf-skips-input-1ccf -> why fgets + sscanf instead of scanf
