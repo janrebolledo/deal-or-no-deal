@@ -59,7 +59,8 @@ int main() {
   }
 
   printf("You chose case #%d. It will stay closed till the end.\n", choice);
-
+  printBoard(&game);
+  
 
   for(int round = 1; round <= NUM_OF_ROUNDS; round++) {
     game.currentRound = round;
@@ -85,6 +86,8 @@ int main() {
       else
 	printf("can't open that one. pick a closed case that's not yours.\n");
     }
+    printBoard(&game);
+    
 
     game.lastOffer = calculateOffer(&game);
     printf("The banker offers: ");
