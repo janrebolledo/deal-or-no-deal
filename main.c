@@ -127,6 +127,48 @@ int main() {
 
   }
 
-  printf("rounds done.\n");
+  //keep or swap
+
+  int otherCase = -1;
+  for(int i = 0; i < NUM_CASES; i++) {
+    if(!game.opened[i] && i != game.playerCase)
+      otherCase = i;
+  }
+
+  printf("\nTHERE'S ONLY TWO CASES LEFT. yours(#%d) and #%d\n",
+	 game.playerCase + 1, otherCase + 1);
+
+
+  while(1) {
+    printf("Keep(1) or Swap(2) cases? ");
+    choice = readInput();
+
+
+    if(choice == IN_STAT)
+      printf("stats not yet");
+    
+    else if(choice == 1) {
+      printf("You kept your case.");
+      break;
+    }
+
+    else if(choice == 2) {
+      int temp = game.playerCase;
+      game.playerCase = otherCase;
+      otherCase = temp;
+      printf("You swapped cases. You now have case #%d.\n", game.playerCase + 1);
+      break;
+    }
+    else {
+      printf("type 1 for keep or 2 for swap.\n");
+    }
+  }
+
+  printf("You won: ");
+  printMoney(game.prizes[game.playerCase]);
+  printf(".\nThe other case had: ");
+  printMoney(game.prizes[otherCase]);
+  printf(".\n");
+  
   return 0;
 }
