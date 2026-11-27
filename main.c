@@ -94,7 +94,36 @@ int main() {
     printMoney(game.lastOffer);
     printf("\n");
     
-    //need to ask deal or no deal
+
+    //asking deal or no deal
+
+    while(1) {
+      printf("Deal(1) or NO deal(2)? ");
+      choice = readInput();
+
+      if(choice == IN_STAT)
+	printf("Stat not yet");
+
+      
+      else if(choice == 1) {
+	printf("\nDEAL!!1! you won: "); 
+	printMoney(game.lastOffer);
+	printf("\nYour case had:; ");
+	printMoney(game.prizes[game.playerCase]);
+	printf("\n");
+	return 0; //game over, exit.
+	
+      }
+
+      else if(choice == 2) {
+	printf("NO deal. Moving on.\n");
+	break; //going back to game
+      }
+      else {
+	printf("type 1 for deal or 2 for NO deal.\n");
+      }
+      
+    }
 
   }
 
