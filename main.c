@@ -4,45 +4,100 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "banker.h"
 #include "game.h"
 
-int main() {
-  GameState game;
+#define NUM_OF_ROUNDS 9
+#define IN_STAT -1 //player wants to view "stats"
+#define IN_INVALID -2 //invalid input
 
+static const int CASES_PER_ROUND[NUM_OF_ROUNDS] = {6, 5, 4, 3, 2, 1, 1, 1, 1};
+
+//prints money in readable format
+static void printMoney(long long cents) {
+  printf("$%lld.%02lld", cents / 100, cents % 100);
+}
+
+//reads player input, return input of stat (IN_STAT) if type "stat", or check invalid
+
+static int readInput() {
+  char line[100];
+  int number;
+
+  if(fgets(line, sizeof(line), stdin) == NULL) {
+    printf("\nBYE\n");
+    exit(0);
+  }
+
+
+  if(strncmp(line, "stat", 4) == 0)
+    return IN_STAT;
+  if(sscanf(line, "%d", &number) == 1)
+    return number;
+
+  return IN_INVALID;
+  
+}
+
+int main() {
+  
+  GameState game;
+  int choice;
   initializeGame(&game);
 
-  printf("\npropotype deal or no deal \n\n");
+  printf("\nDEAL OR NO DEAL\n\n");
 
-  int choice;
+  while(1) {
+    printf("pick case (1 - 26) : ");
+    choice = readInput();
 
-  printf("Pick case (1 - 26): ");
-  scanf("%d", &choice);
-
-  while (!selectPlayerCase(&game, choice)) {
-    printf("Invalid case. Valid numbers are 1-26.");
-    scanf("%d", &choice);
+    if(choice == IN_STAT)
+      printf("stats not yet implemented");
+    else if(selectPlayerCase(&game, choice)) //valid choice so leave loop
+      break;
+    else
+      printf("Invalid. pick another. Number between 1 and 26.\n");
   }
 
-  printf("You chose case #%d. It will stay closed.\n", choice);
+  printf("You chose case #%d. It will stay closed till the end.\n", choice);
 
-  for (int i = 0; i < 3; i++) {
-    printf("Open a case: ");
-    scanf("%d", &choice);
-    while (!openCase(&game, choice)) {
-      printf("Error opening that one. try again: ");
-      scanf("%d", &choice);
+
+  for(int round = 1; round <= NUM_OF_ROUNDS; round++) {
+    game.currentRound = round;
+
+    int howManyOpen = CASES_PER_ROUND[round - 1];
+
+
+    printf("\nROUND %d: open %d case(s)\n", round, howManyOpen);
+
+    while(howManyOpen > 0) {
+      printf("open a case (%d left this round.): ", howManyOpen);
+      choice = readInput();
+
+      if(choice == IN_STAT)
+	printf("stat not yet implemented");
+
+      else if(openCase(&game, choice)) {
+	printf("Case #%d had ", choice);
+	printMoney(game.prizes[choice - 1]);
+	printf("\n");
+	howManyOpen--;
+      }
+      else
+	printf("can't open that one. pick a closed case that's not yours.\n");
     }
 
-    //dollar and cents
-    printf("Case #%d had $%lld.%02lld\n", choice,
-	   game.prizes[choice - 1] / 100, game.prizes[choice - 1] % 100);
+    game.lastOffer = calculateOffer(&game);
+    printf("The banker offers: ");
+    printMoney(game.lastOffer);
+    printf("\n");
     
+    //need to ask deal or no deal
 
-    printf("Cases remaining: %d\n\n", countRemaining(&game));
-    
   }
 
-  printf("thats it for now lol\n");
-  
+  printf("rounds done.\n");
   return 0;
 }
